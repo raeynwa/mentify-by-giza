@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Public\Mentor;
 use App\Models\Public\TipeWebinar;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -39,7 +40,7 @@ class AllSeeder extends Seeder
                 'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
             ]);
         }
-        
+
         $user = [
             ['Evan Gilang', 'evangilang@mail.com', 1, 1, 'Seeder', 'Seeder']
         ];
@@ -60,7 +61,7 @@ class AllSeeder extends Seeder
         }
 
         $mentor = [
-            ['Evan Gilang', 'evangilang@mail.com', 'mentor1.png', 1 ,1, 'Seeder', 'Seeder'],
+            ['Evan Gilang', 'evangilang@mail.com', 'mentor1.png', 1, 1, 'Seeder', 'Seeder'],
         ];
 
         foreach ($mentor as $item) {
@@ -82,6 +83,31 @@ class AllSeeder extends Seeder
                     ]);
                 }
             }
+        }
+
+        $webinar = [
+            ['Basic of UX Writing - Module 101', 1, 30, 20, '2023-10-12', 1, 1, 'Seeder', 'Seeder'],
+        ];
+
+        foreach ($webinar as $item) {
+            $data_tipe = TipeWebinar::first();
+            $data_mentor = Mentor::first();
+            DB::table('webinar')->insert([
+                'id'                => (string) Str::uuid(),
+                'name'              => $item[0],
+                'level'             => $item[1],
+                'quota'             => $item[2],
+                'pendaftar'         => $item[3],
+                'tgl_akhir'         => $item[4],
+                'sts_aktif'         => $item[5],
+                'sts_hapus'         => $item[6],
+                'id_tipe_webinar'   => $data_tipe->id,
+                'id_mentor'         => $data_mentor->id,
+                'created_by'        => $item[7],
+                'updated_by'        => $item[8],
+                'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'        => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
         }
     }
 }

@@ -16,6 +16,7 @@ class Webinar extends Model
         'level',
         'id_mentor',
         'quota',
+        'pendaftar',
         'tgl_akhir',
         'sts_aktif',
         'sts_hapus',

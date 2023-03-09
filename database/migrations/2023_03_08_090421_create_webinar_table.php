@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name', 255)->nullable(false);
             $table->uuid('id_tipe_webinar')->nullable(false);
             $table->string('level', 255)->nullable(false);
-            $table->text('id_mentor')->nullable(false);
-            $table->string('quota', 255)->nullable(false);
+            $table->uuid('id_mentor')->nullable(false);
+            $table->integer('quota')->nullable(false)->default(0);
+            $table->integer('pendaftar')->nullable(false)->default(0);
             $table->string('tgl_akhir', 255)->nullable(false);
             $table->integer('sts_aktif')->nullable(false)->default('1');
             $table->integer('sts_hapus')->nullable(false)->default('1');
