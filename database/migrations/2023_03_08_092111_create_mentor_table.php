@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mentor', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 255)->nullable(false);
+            $table->string('email', 255)->nullable(false);
             $table->uuid('id_user')->nullable(false);
             $table->string('foto', 255)->nullable(false);
             $table->integer('sts_aktif')->nullable(false)->default('1');

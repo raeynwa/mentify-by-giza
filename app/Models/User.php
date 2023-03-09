@@ -7,20 +7,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\Uuid;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Uuid;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
+     protected $keyType = 'uuid';
+     protected $table = 'users';
+     public $incrementing = false;
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
+        'sts_aktif',
+        'sts_hapus',
+        'created_by',
+        'updated_by'
     ];
 
     /**
@@ -41,4 +51,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function user()
+    {
+        return $this->hasOne('App\Models\Public\Mentor', 'id', 'id_user');
+    }
 }

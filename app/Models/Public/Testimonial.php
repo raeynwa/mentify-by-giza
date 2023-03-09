@@ -12,6 +12,7 @@ class Testimonial extends Model
     protected $fillable = [
         'id',
         'name',
+        'testimoni',
         'pekerjaan',
         'foto',
         'sts_aktif',
