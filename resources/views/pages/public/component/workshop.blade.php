@@ -29,64 +29,67 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg bg-white">
+    <nav class="navbar navbar-expand-lg bg-white mt-3">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Mentify Bootcamp</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mentify Lite</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Online Workshop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Webinar</a>
-                    </li>
+                    @foreach ($tipe_webinar as $item)
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">{{ $item['name'] }}</a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header bg-primary">
-                    <img src="{{ asset('assets/images/logo/Logo_white.png') }}" alt="">
-                </div>
-                <div class="card-header bg-primary text-white">
-                    <h5>Basic of UX Writing - Module 101</h5>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="img">
-                            <img src="{{ asset('assets/images/mentor/mentor1.png') }}" class="rounded-all" alt="">
-                            <img src="{{ asset('assets/images/mentor/mentor1.png') }}" class="rounded-all" alt="">
-                            <img src="{{ asset('assets/images/mentor/mentor1.png') }}" class="rounded-all" alt="">
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-primary">Intermediate</button>
+    <div class="row mt-5">
+        @foreach ($webinar as $item)
+            <div class="col-md-4">
+                @php
+                    if ($item['level'] == 1) {
+                        $item['level'] = 'Intermediate';
+                    } else {
+                        $item['level'] = 'Basic';
+                    }
+                @endphp
+                <div class="card shadow">
+                    <div class="card-header bg-primary">
+                        <img src="{{ asset('assets/images/logo/Logo_white.png') }}" alt="">
+                    </div>
+                    <div class="card-header bg-primary text-white">
+                        <h5>{{ $item['name'] }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="img">
+                                <img src="{{ asset('assets/images/mentor/mentor1.png') }}" class="rounded-all" alt="">
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-primary">{{ $item['level'] }}</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h6>Mentor</h6>
-                    <p>Evan Gilang, Annisa Nur, Evira Tiffany</p>
-                </div>
-                <div class="card-footer">
-                    <div class="d-grid">
-                        <button type="button" class="btn btn-primary">Pelajari Workshop Lebih Lanjut</button>
+                    <div class="card-body">
+                        <h6>Mentor</h6>
+                        <p>{{ $item['mentor']['name'] }}</p>
                     </div>
-                </div>
-                <div class="card-footer text-center">
-                    <span>Lihat silabus yang diberikan di workshop ini</span>
+                    @if ($item['pendaftar'] < $item['quota'])
+                        <div class="card-footer">
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary">Pelajari Workshop Lebih Lanjut</button>
+                            </div>
+                        </div>
+                    @else
+                        <div class="card-footer text-center">
+                            <span>Lihat silabus yang diberikan di workshop ini</span>
+                        </div>
+                    @endif
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 </div>

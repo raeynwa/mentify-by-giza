@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid('id_mentor')->nullable(false);
             $table->integer('quota')->nullable(false)->default(0);
             $table->integer('pendaftar')->nullable(false)->default(0);
-            $table->string('tgl_akhir', 255)->nullable(false);
+            $table->date('tgl_akhir')->nullable(false);
             $table->integer('sts_aktif')->nullable(false)->default('1');
             $table->integer('sts_hapus')->nullable(false)->default('1');
             $table->string('created_by', 255)->nullable(false);
