@@ -71,9 +71,9 @@ class AllSeeder extends Seeder
                     DB::table('mentor')->insert([
                         'id'            => (string) Str::uuid(),
                         'name'          => $item[0],
-                        'email'          => $item[1],
-                        'foto'         => $item[2],
-                        'id_user'      => $value->id,
+                        'email'         => $item[1],
+                        'foto'          => $item[2],
+                        'id_user'       => $value->id,
                         'sts_aktif'     => $item[3],
                         'sts_hapus'     => $item[4],
                         'created_by'    => $item[5],
